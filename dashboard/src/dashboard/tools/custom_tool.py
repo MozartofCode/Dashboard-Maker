@@ -2,17 +2,15 @@ from typing import Type
 from crewai_tools import BaseTool
 from pydantic import BaseModel, Field
 
-class MyCustomToolInput(BaseModel):
-    """Input schema for MyCustomTool."""
-    argument: str = Field(..., description="Description of the argument.")
+class PieGraphInput(BaseModel):
+    """Input schema for PieGraph."""
+    data: dict = Field(..., description="Data to be plotted in the pie graph.")
 
-class MyCustomTool(BaseTool):
-    name: str = "Name of my tool"
-    description: str = (
-        "Clear description for what this tool is useful for, you agent will need this information to use it."
-    )
-    args_schema: Type[BaseModel] = MyCustomToolInput
+class PieGraph(BaseTool):
+    name: str = "Pie Graph"
+    description: str = "A tool to plot pie graphs."
+    args_schema: Type[BaseModel] = PieGraphInput
 
-    def _run(self, argument: str) -> str:
+    def _run(self, data: dict) -> str:
         # Implementation goes here
         return "this is an example of a tool output, ignore it and move along."
